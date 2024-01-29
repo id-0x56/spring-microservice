@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: 00x56/docker-openjdk
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -37,8 +37,12 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  annotations: {}
+  # metallb.universe.tf/loadBalancerIPs: 192.168.0.100
   type: ClusterIP
-  port: 80
+#  nodePort: 31080
+  targetPort: 8080
+  port: 8080
 
 ingress:
   enabled: false
@@ -80,3 +84,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+livenessProbe:
+  initialDelaySeconds: 180
+  periodSeconds: 15
+  timeoutSeconds: 10
+
+readinessProbe:
+  initialDelaySeconds: 180
+  periodSeconds: 15
+  timeoutSeconds: 10
+
+java:
+  workdir: /var/www/java-app
+  exec: build/libs/rest-0.0.1-SNAPSHOT.jar
