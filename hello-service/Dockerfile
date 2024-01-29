@@ -30,6 +30,8 @@ RUN ls -la /opt \
     && ls -la /usr/bin/mvn \
     && ls -la /usr/bin/gradle
 
+COPY . /var/www/java-app
+
 COPY --chmod=755 docker-entrypoint.sh /docker-entrypoint.sh
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
@@ -39,7 +41,7 @@ CMD [ "build/libs/rest-service.jar" ]
 
 
 # docker login
-# docker build --no-cache -t 00x56/docker-openjdk:latest .
-# docker push 00x56/docker-openjdk:latest
+# docker build --no-cache --tag 00x56/docker-openjdk:hello .
+# docker push 00x56/docker-openjdk:hello
 
 # docker run --rm --interactive --tty --volume .:/var/www/java-app --workdir /var/www/java-app --publish 8080:8080 00x56/docker-openjdk build/libs/rest-0.0.1-SNAPSHOT.jar
