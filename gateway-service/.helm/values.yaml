@@ -8,7 +8,7 @@ image:
   repository: 00x56/docker-openjdk
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "hello"
+  tag: "gateway"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,8 +39,8 @@ securityContext: {}
 service:
   annotations: {}
   # metallb.universe.tf/loadBalancerIPs: 192.168.0.100
-  type: ClusterIP
-#  nodePort: 31080
+  type: NodePort
+  nodePort: 31080
   targetPort: 8080
   port: 8080
 

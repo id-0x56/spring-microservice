@@ -41,7 +41,7 @@ CMD [ "build/libs/rest-service.jar" ]
 
 
 # docker login
-# docker build --no-cache --tag 00x56/docker-openjdk:hello .
-# docker push 00x56/docker-openjdk:hello
+# docker build --no-cache --tag 00x56/docker-openjdk:gateway .
+# docker push 00x56/docker-openjdk:gateway
 
 # docker run --rm --interactive --tty --volume .:/var/www/java-app --workdir /var/www/java-app --publish 8080:8080 00x56/docker-openjdk build/libs/rest-0.0.1-SNAPSHOT.jar
